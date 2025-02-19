@@ -18,4 +18,5 @@
 * `cdk diff` - Show the difference between the local stack and the deployed version
 * `cdk doctor` - Diagnose potential issues in the CDK environment
 * `cdk destroy <stack_name>` - Delete the specified stack
+* `cdk deploy --parameters <parameter_name>=<value>` – Set a parameter and its value for deployment
 
