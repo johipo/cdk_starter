@@ -1,5 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
-import { Fn } from 'aws-cdk-lib';
+import { CfnOutput, Fn } from 'aws-cdk-lib';
 import { Bucket, CfnBucket } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 
@@ -11,11 +11,16 @@ export class PhotosStack extends cdk.Stack {
 
       this.initializeSuffix();
 
-      const myBucket = new Bucket(this, 'PhotosBucket2', {
-        bucketName: `photos-bucket-${this.stackSuffix}-${this.region}`
+      const photosBucket = new Bucket(this, 'PhotosBucket3', {
+        bucketName: `photos-bucket-${this.stackSuffix}`
       });
 
-      (myBucket.node.defaultChild as CfnBucket).overrideLogicalId('ChildLogicalIDPhotosBucket002');
+      (photosBucket.node.defaultChild as CfnBucket).overrideLogicalId('LogicalIDPhotosBucket3');
+
+      new CfnOutput(this, 'photos-bucket', {
+        value: photosBucket.bucketArn, //This is the Bucket Physical ID
+        exportName: 'photos-bucket'
+      })
     }
 
     private initializeSuffix(){
